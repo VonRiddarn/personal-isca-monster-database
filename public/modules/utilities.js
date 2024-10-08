@@ -1,8 +1,8 @@
 import { NumericFilterMethod } from "./enums.js";
 
 export {
-	addDropDownFromEnum,
-	addNumericInputFieldsFromEnum,
+	generateDropDownFromEnum,
+	generateNumericInputFieldsFromEnum,
 };
 
 /**
@@ -10,7 +10,7 @@ export {
  * @param {Object} enumToItterate Enum to extract dropdown values from.
  * @param {String} id HTML element id of this dropdown to reference it later.
  */
-function addDropDownFromEnum(parentElement, enumToItterate, id)
+function generateDropDownFromEnum(parentElement, enumToItterate, id)
 {
 	// <select>
 	const select = parentElement.appendChild(document.createElement("select"));
@@ -33,7 +33,7 @@ function addDropDownFromEnum(parentElement, enumToItterate, id)
  * @param {String} idRoot The root name for the created elements. eg: filtered-search-form
  * @param {Boolean} isFilter Adds a checkbox and numericFilterEnum to the input.
  */
-function addNumericInputFieldsFromEnum(parentElement, enumToItterate, idRoot, isFilter = false)
+function generateNumericInputFieldsFromEnum(parentElement, enumToItterate, idRoot, isFilter = false)
 {
 	for (const el in enumToItterate) 
 	{
@@ -60,7 +60,7 @@ function addNumericInputFieldsFromEnum(parentElement, enumToItterate, idRoot, is
 
 		// <select>
 		if (isFilter)
-			addDropDownFromEnum(labelSpan, NumericFilterMethod, `${elementId}-numeric-filter-dropdown`);
+			generateDropDownFromEnum(labelSpan, NumericFilterMethod, `${elementId}-numeric-filter-dropdown`);
 
 		// <input type="number" />
 		const count = span.appendChild(document.createElement("input"));

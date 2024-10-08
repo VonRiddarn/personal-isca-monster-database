@@ -1,4 +1,4 @@
-import { addDropDownFromEnum, addNumericInputFieldsFromEnum } from "./utilities.js";
+import { generateDropDownFromEnum, generateNumericInputFieldsFromEnum } from "./utilities.js";
 import { MonsterColor, MonsterAttribute, NumericFilterMethod } from "./enums.js";
 import { monsters } from "./monster_list.js";
 
@@ -14,7 +14,7 @@ filteredSearchForm.innerHTML = "";
 
 // Add form elements to span through functions
 applyMonsterColorToForm(filteredSearchForm);
-addNumericInputFieldsFromEnum(filteredSearchForm, MonsterAttribute, "filtered-search-monster-attribute", true);
+generateNumericInputFieldsFromEnum(filteredSearchForm, MonsterAttribute, "filtered-search-monster-attribute", true);
 
 // Create search <button> (filtered seach form submitter)
 const filteredSearchButton = filteredSearchForm.appendChild(document.createElement("button"));
@@ -51,7 +51,7 @@ function applyMonsterColorToForm(form)
 	label.innerHTML = "Color";
 
 	// <select>
-	addDropDownFromEnum(span, MonsterColor, "filtered-search-monster-color-dropdown");
+	generateDropDownFromEnum(span, MonsterColor, "filtered-search-monster-color-dropdown");
 }
 
 // TODO: 
