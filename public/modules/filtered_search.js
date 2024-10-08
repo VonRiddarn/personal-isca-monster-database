@@ -8,17 +8,16 @@ export {
 };
 
 // Create <form> then create <span> and save the <span> to a variable so we can mutate it in a function later.
-const filteredSearchRoot = document.querySelector("#filter-search-monster");
-const filteredSearchForm = filteredSearchRoot.querySelector("form");
+const filteredSearchForm = document.getElementById("filtered-search").querySelector("form");
 filteredSearchForm.innerHTML = "";
 
 // Add form elements to span through functions
 applyMonsterColorToForm(filteredSearchForm);
-generateNumericInputFieldsFromEnum(filteredSearchForm, MonsterAttribute, "filtered-search-monster-attribute", true);
+generateNumericInputFieldsFromEnum(filteredSearchForm, MonsterAttribute, "filtered-search-attribute", true);
 
 // Create search <button> (filtered seach form submitter)
 const filteredSearchButton = filteredSearchForm.appendChild(document.createElement("button"));
-filteredSearchButton.setAttribute("id", "filtered-search-monster-form-submit");
+filteredSearchButton.setAttribute("id", "filtered-search-form-submit");
 filteredSearchButton.innerHTML = "Search";
 
 filteredSearchButton.addEventListener('click', (e) =>
@@ -35,7 +34,7 @@ function applyMonsterColorToForm(form)
 {
 	// <span>
 	const span = form.appendChild(document.createElement("span"));
-	span.setAttribute("id", "filtered-search-monster-color-span");
+	span.setAttribute("id", "filtered-search-color-span");
 	
 	// <span> label
 	const labelSpan = span.appendChild(document.createElement("span"));
@@ -43,15 +42,15 @@ function applyMonsterColorToForm(form)
 	// <input type="checkbox">
 	const colorCheckBox = labelSpan.appendChild(document.createElement("input"));
 	colorCheckBox.setAttribute("type", "checkbox");
-	colorCheckBox.setAttribute("id", "filtered-search-monster-color-isactive");
+	colorCheckBox.setAttribute("id", "filtered-search-color-isactive");
 
 	// <label>
 	const label = labelSpan.appendChild(document.createElement("label"));
-	label.setAttribute("for", "filtered-search-monster-color-isactive");
+	label.setAttribute("for", "filtered-search-color-isactive");
 	label.innerHTML = "Color";
 
 	// <select>
-	generateDropDownFromEnum(span, MonsterColor, "filtered-search-monster-color-dropdown");
+	generateDropDownFromEnum(span, MonsterColor, "filtered-search-color-dropdown");
 }
 
 // TODO: 
@@ -64,12 +63,12 @@ function getFilterCriteria()
 		attributes: {},
 	};
 	
-	if(document.getElementById("filtered-search-monster-color-isactive").checked)
-		fc.color = document.getElementById("filtered-search-monster-color-dropdown").value
+	if(document.getElementById("filtered-search-color-isactive").checked)
+		fc.color = document.getElementById("filtered-search-color-dropdown").value
 	
 	for (const attribute in MonsterAttribute) 
 	{
-		let elementId = `filtered-search-monster-attribute-${attribute}`;
+		let elementId = `filtered-search-attribute-${attribute}`;
 		// If checkbox for attribute is not active: skip
 		if(!document.getElementById(`${elementId}-isactive`).checked)
 			continue;
