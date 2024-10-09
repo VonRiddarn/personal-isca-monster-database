@@ -5,8 +5,8 @@ export {
 };
 
 // ----- ----- ----- ----- -----
-function getFilterCriteria()
-{
+function getFilterCriteria() {
+
 	const fc = {
 		color: null,
 		attributes: {},
@@ -16,12 +16,15 @@ function getFilterCriteria()
 		fc.color = document.getElementById("filtered-search-color-dropdown").value
 	
 	for (const attribute in MonsterAttribute) {
+
 		let elementId = `filtered-search-attribute-${attribute}`;
+
 		// If checkbox for attribute is not active: skip
 		if(!document.getElementById(`${elementId}-isactive`).checked)
 			continue;
 		
 		fc.attributes[attribute] = {
+
 			filterMethod : document.getElementById(`${elementId}-numeric-filter-dropdown`).value,
 			amount : document.getElementById(`${elementId}-count`).value,
 		};
@@ -37,22 +40,22 @@ function getFilterCriteria()
  * @param {Array} monstersArr The array containing all monster objects in javascript form
  * @returns monsterArr modified to only include monsters matching the current active filters on the form.
  */
-function getFilteredMonsterArray(monstersArr)
-{
+function getFilteredMonsterArray(monstersArr) {
+
 	const filterCriteria = getFilterCriteria();
 	
 	// Filter : Goes through and makes a conditional on each element, if true, pass to reutrn array
-	return monstersArr.filter(monster => 
-	{
+	return monstersArr.filter(monster => {
+
 		// If color filter exists, and we do NOT match.
 		if (filterCriteria.color != null && monster.color !== filterCriteria.color)
 			return false;
 
 		// If attribute filter exists, go nest and do more checks
-		if(Object.keys(filterCriteria.attributes).length > 0)
-		{
-			for(let [attributeKey, filterCondition] of Object.entries(filterCriteria.attributes))
-			{
+		if(Object.keys(filterCriteria.attributes).length > 0) {
+
+			for(let [attributeKey, filterCondition] of Object.entries(filterCriteria.attributes)) {
+
 				// Skip if attribute does not exist on monster.
 				if(monster[attributeKey] === undefined)
 					continue;
@@ -63,8 +66,8 @@ function getFilteredMonsterArray(monstersArr)
 				// Translate filterCondition object into 2 variables for clarity
 				const { filterMethod, amount } = filterCondition;
 
-				switch(filterMethod)
-				{
+				switch(filterMethod) {
+					
 					case NumericFilterMethod.LessThan:
 						if(value >= amount)
 							return false;
