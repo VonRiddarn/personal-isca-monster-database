@@ -1,57 +1,24 @@
-import { generateDropDownFromEnum, generateNumericInputFieldsFromEnum } from "./utilities.js";
+import { generateDropDownFromEnum, generateNumericInputFieldsFromEnum, generateButton } from "./utilities.js";
 import { MonsterColor, MonsterAttribute, NumericFilterMethod } from "./enums.js";
 import { monsters } from "./monster_list.js";
 
 export {
-	applyMonsterColorToForm,
 	getFilteredMonsterArray,
 };
 
-// Create <form> then create <span> and save the <span> to a variable so we can mutate it in a function later.
+
 const filteredSearchForm = document.getElementById("filtered-search").querySelector("form");
-filteredSearchForm.innerHTML = "";
 
 // Add form elements to span through functions
-applyMonsterColorToForm(filteredSearchForm);
+generateDropDownFromEnum(filteredSearchForm, MonsterColor, "Color", "filtered-search-color", true);
 generateNumericInputFieldsFromEnum(filteredSearchForm, MonsterAttribute, "filtered-search-attribute", true);
 
 // Create search <button> (filtered seach form submitter)
-const filteredSearchButton = filteredSearchForm.appendChild(document.createElement("button"));
-filteredSearchButton.setAttribute("id", "filtered-search-form-submit");
-filteredSearchButton.innerHTML = "Search";
-
-filteredSearchButton.addEventListener('click', (e) =>
+generateButton(filteredSearchForm, "Search", "filtered-search-form-submit").addEventListener('click', (e) =>
 {
 	e.preventDefault();
 	console.log(getFilteredMonsterArray(monsters));
 });
-
-/**
- * Generates and applies MonsterColor HTML elements the passed form.
- * @param {Form} form 
- */
-function applyMonsterColorToForm(form)
-{
-	// <span>
-	const span = form.appendChild(document.createElement("span"));
-	span.setAttribute("id", "filtered-search-color-span");
-	
-	// <span> label
-	const labelSpan = span.appendChild(document.createElement("span"));
-	
-	// <input type="checkbox">
-	const colorCheckBox = labelSpan.appendChild(document.createElement("input"));
-	colorCheckBox.setAttribute("type", "checkbox");
-	colorCheckBox.setAttribute("id", "filtered-search-color-isactive");
-
-	// <label>
-	const label = labelSpan.appendChild(document.createElement("label"));
-	label.setAttribute("for", "filtered-search-color-isactive");
-	label.innerHTML = "Color";
-
-	// <select>
-	generateDropDownFromEnum(span, MonsterColor, "filtered-search-color-dropdown");
-}
 
 // TODO: 
 // Change this to dynamically create the filterCriteria object from filter form
