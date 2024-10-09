@@ -2,15 +2,43 @@ import { NumericFilterMethod } from "./enums.js";
 
 export {
 	generateDropDownFromEnum,
+	generateRawDropDownFromEnum,
 	generateNumericInputFieldsFromEnum,
+	generateButton,
 };
+
+function generateDropDownFromEnum(parentElement, enumToItterate, label, idRoot, isFilter = false)
+{
+	// <span>
+	const span = parentElement.appendChild(document.createElement("span"));
+	span.setAttribute("id", `${idRoot}-span`);
+
+	// <span> label
+	const labelSpan = span.appendChild(document.createElement("span"));
+
+	// <input type="checkbox">
+	if(isFilter)
+	{
+		const colorCheckBox = labelSpan.appendChild(document.createElement("input"));
+		colorCheckBox.setAttribute("type", "checkbox");
+		colorCheckBox.setAttribute("id", `${idRoot}-isactive`);
+	}
+
+	// <label>
+	const labelElement = labelSpan.appendChild(document.createElement("label"));
+	labelElement.setAttribute("for", `${idRoot}-${isFilter ? "isactive" : "dropdown"}`);
+	labelElement.innerHTML = label;
+
+	// <select>
+	generateRawDropDownFromEnum(span, enumToItterate, `${idRoot}-dropdown`);
+}
 
 /**
  * @param {Element} parentElement HTML element to append the drop down menu to.
  * @param {Object} enumToItterate Enum to extract dropdown values from.
  * @param {String} id HTML element id of this dropdown to reference it later.
  */
-function generateDropDownFromEnum(parentElement, enumToItterate, id)
+function generateRawDropDownFromEnum(parentElement, enumToItterate, id)
 {
 	// <select>
 	const select = parentElement.appendChild(document.createElement("select"));
@@ -60,11 +88,20 @@ function generateNumericInputFieldsFromEnum(parentElement, enumToItterate, idRoo
 
 		// <select>
 		if (isFilter)
-			generateDropDownFromEnum(labelSpan, NumericFilterMethod, `${elementId}-numeric-filter-dropdown`);
+			generateRawDropDownFromEnum(labelSpan, NumericFilterMethod, `${elementId}-numeric-filter-dropdown`);
 
 		// <input type="number" />
 		const count = span.appendChild(document.createElement("input"));
 		count.setAttribute("type", "number");
 		count.setAttribute("id", `${elementId}-count`);
 	}
+}
+
+function generateButton(parentElement, label, id)
+{
+	const btn = parentElement.appendChild(document.createElement("button"));
+	btn.setAttribute("id", id);
+	btn.innerHTML = "Search";
+
+	return btn;
 }
