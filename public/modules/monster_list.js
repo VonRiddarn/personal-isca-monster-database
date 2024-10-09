@@ -4,6 +4,8 @@ export {
 	monsters
 };
 
+let nexyUid = 0;
+
 // getMonsters(useDummyList = false)
 /* addMonster(monsterObj)
 {
@@ -23,6 +25,7 @@ export {
 const monsters =
 	[
 		{
+			uid: 0,
 			alias: "James P. Sulivan",
 			color: "Blue",
 			Eyes: 2,
@@ -32,6 +35,7 @@ const monsters =
 			Legs: 2
 		},
 		{
+			uid: 1,
 			alias: "Mike Wazowski",
 			color: "Green",
 			Eyes: 1,
@@ -41,6 +45,7 @@ const monsters =
 			Legs: 2
 		},
 		{
+			uid: 2,
 			alias: "Randall Boggs",
 			color: "Purple",
 			Eyes: 2,
@@ -50,6 +55,7 @@ const monsters =
 			Legs: 6
 		},
 		{
+			uid: 3,
 			alias: "Celia Mae",
 			color: "Purple",
 			Eyes: 11,
@@ -59,6 +65,7 @@ const monsters =
 			Legs: 8
 		},
 		{
+			uid: 4,
 			alias: "Henry J. Watermoose",
 			color: "Blue",
 			Eyes: 5,
@@ -68,6 +75,7 @@ const monsters =
 			Legs: 8
 		},
 		{
+			uid: 5,
 			alias: "Fluffy McTentacleface",
 			color: "Purple",
 			Eyes: 4,
@@ -77,6 +85,7 @@ const monsters =
 			Legs: 4
 		},
 		{
+			uid: 6,
 			alias: "Sir Slimebottom",
 			color: "Green",
 			Eyes: 1,
@@ -86,6 +95,7 @@ const monsters =
 			Legs: 1
 		},
 		{
+			uid: 7,
 			alias: "Spikey VonTooth",
 			color: "Red",
 			Eyes: 6,
@@ -95,6 +105,7 @@ const monsters =
 			Legs: 4
 		},
 		{
+			uid: 8,
 			alias: "Wiggles McGiggles",
 			color: "Green",
 			Eyes: 3,
@@ -104,6 +115,7 @@ const monsters =
 			Legs: 8
 		},
 		{
+			uid: 9,
 			alias: "Bobby Blobulus",
 			color: "Blue",
 			Eyes: 7,
@@ -113,6 +125,7 @@ const monsters =
 			Legs: 0
 		},
 		{
+			uid: 10,
 			alias: "Gurglesworth the Glutton",
 			color: "Red",
 			Eyes: 1,
@@ -122,6 +135,7 @@ const monsters =
 			Legs: 0
 		},
 		{
+			uid: 11,
 			alias: "Squishy McBounce",
 			color: "Purple",
 			Eyes: 2,
@@ -131,6 +145,7 @@ const monsters =
 			Legs: 2
 		},
 		{
+			uid: 12,
 			alias: "Captain Clawtentacle",
 			color: "Red",
 			Eyes: 8,
@@ -140,6 +155,7 @@ const monsters =
 			Legs: 4
 		},
 		{
+			uid: 13,
 			alias: "Blinko the Eyeful",
 			color: "Blue",
 			Eyes: 12,
@@ -149,6 +165,7 @@ const monsters =
 			Legs: 2
 		},
 		{
+			uid: 14,
 			alias: "Puffy Longtail",
 			color: "Purple",
 			Eyes: 3,
@@ -158,6 +175,7 @@ const monsters =
 			Legs: 4
 		},
 		{
+			uid: 15,
 			alias: "Scuttles McBugface",
 			color: "Green",
 			Eyes: 2,
@@ -167,6 +185,7 @@ const monsters =
 			Legs: 8
 		},
 		{
+			uid: 16,
 			alias: "Snaggletooth Joe",
 			color: "Blue",
 			Eyes: 2,
@@ -176,6 +195,7 @@ const monsters =
 			Legs: 6
 		},
 		{
+			uid: 17,
 			alias: "Glorp the Blobulous",
 			color: "Green",
 			Eyes: 1,
@@ -185,6 +205,7 @@ const monsters =
 			Legs: 0
 		},
 		{
+			uid: 18,
 			alias: "Nibbles McFang",
 			color: "Red",
 			Eyes: 3,
@@ -194,6 +215,7 @@ const monsters =
 			Legs: 4
 		},
 		{
+			uid: 19,
 			alias: "Lurky Darktail",
 			color: "Purple",
 			Eyes: 4,
@@ -203,6 +225,7 @@ const monsters =
 			Legs: 4
 		},
 		{
+			uid: 20,
 			alias: "Dr. Snufflesnort",
 			color: "Blue",
 			Eyes: 9,
