@@ -20,8 +20,8 @@ generateButton(filteredSearchForm, "Search", "filtered-search-form-submit").addE
 	console.log(getFilteredMonsterArray(monsters));
 });
 
-// TODO: 
-// Change this to dynamically create the filterCriteria object from filter form
+
+// ----- ----- ----- ----- -----
 function getFilterCriteria()
 {
 	const fc = 
@@ -50,6 +50,8 @@ function getFilterCriteria()
 	return fc;
 }
 
+// Beyond this point there is only pain.
+
 /**
  * 
  * @param {Array} monstersArr The array containing all monster objects in javascript form
@@ -59,6 +61,7 @@ function getFilteredMonsterArray(monstersArr)
 {
 	const filterCriteria = getFilterCriteria();
 	
+	// Filter : Goes through and makes a conditional on each element, if true, pass to reutrn array
 	return monstersArr.filter(monster => 
 	{
 		// If color filter exists, and we do NOT match.
@@ -74,7 +77,10 @@ function getFilteredMonsterArray(monstersArr)
 				if(monster[attributeKey] === undefined)
 					continue;
 				
-				const value = monster[attributeKey]; // Current monster attribute count saved in value
+				// Current monster attribute >count< saved in value
+				const value = monster[attributeKey]; 
+
+				// Translate filterCondition object into 2 variables for clarity
 				const { filterMethod, amount } = filterCondition;
 
 				switch(filterMethod)
