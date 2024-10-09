@@ -101,7 +101,7 @@ function generateButton(parentElement, label, id)
 {
 	const btn = parentElement.appendChild(document.createElement("button"));
 	btn.setAttribute("id", id);
-	btn.innerHTML = "Search";
+	btn.innerHTML = label;
 
 	return btn;
 }
