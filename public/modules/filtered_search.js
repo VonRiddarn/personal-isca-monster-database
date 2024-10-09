@@ -6,14 +6,14 @@ export {
 	getFilteredMonsterArray,
 };
 
-
+// Find form
 const filteredSearchForm = document.getElementById("filtered-search").querySelector("form");
 
-// Add form elements to span through functions
+// Generate inputs
 generateDropDownFromEnum(filteredSearchForm, MonsterColor, "Color", "filtered-search-color", true);
 generateNumericInputFieldsFromEnum(filteredSearchForm, MonsterAttribute, "filtered-search-attribute", true);
 
-// Create search <button> (filtered seach form submitter)
+// Create submit button
 generateButton(filteredSearchForm, "Search", "filtered-search-form-submit").addEventListener('click', (e) =>
 {
 	e.preventDefault();
