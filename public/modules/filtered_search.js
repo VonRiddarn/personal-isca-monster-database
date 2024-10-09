@@ -7,8 +7,7 @@ export {
 // ----- ----- ----- ----- -----
 function getFilterCriteria()
 {
-	const fc = 
-	{
+	const fc = {
 		color: null,
 		attributes: {},
 	};
@@ -16,15 +15,13 @@ function getFilterCriteria()
 	if(document.getElementById("filtered-search-color-isactive").checked)
 		fc.color = document.getElementById("filtered-search-color-dropdown").value
 	
-	for (const attribute in MonsterAttribute) 
-	{
+	for (const attribute in MonsterAttribute) {
 		let elementId = `filtered-search-attribute-${attribute}`;
 		// If checkbox for attribute is not active: skip
 		if(!document.getElementById(`${elementId}-isactive`).checked)
 			continue;
 		
-		fc.attributes[attribute] = 
-		{
+		fc.attributes[attribute] = {
 			filterMethod : document.getElementById(`${elementId}-numeric-filter-dropdown`).value,
 			amount : document.getElementById(`${elementId}-count`).value,
 		};
