@@ -12,7 +12,6 @@ const addMonsterForm = document.getElementById("add-monster").querySelector("for
 // Filter form
 const filteredSearchForm = document.getElementById("filtered-search").querySelector("form");
 
-
 const renderer = {
 
 	cardRenderer : {
@@ -26,8 +25,12 @@ const renderer = {
 	formRenderer : {
 
 		addMonster: {
-
+			/**
+			 * Can be used to clear the form.
+			 */
 			renderForm() {
+				// Clean slate
+				addMonsterForm.innerHTML = "";
 
 				// Generate inputs 
 				utilities.generateDropDownFromEnum(addMonsterForm, MonsterColor, "Color", "add-monster-color");
@@ -41,15 +44,13 @@ const renderer = {
 					nextMonsterId++;
 				});
 			},
-
-			clearForm() {
-				// TODO: Add clear logic.
-				debug.log("Add logic to clear the form!");
-			}
 		},
 
 		filters: {
 
+			/**
+			 * Can be used to clear the form.
+			 */
 			renderForm() {
 
 				// Clean slate
@@ -64,13 +65,13 @@ const renderer = {
 				{
 					e.preventDefault();
 					renderer.cardRenderer.renderCards(monsterList.getMonsters(true));
+					renderer.formRenderer.filters.renderForm();
 				});
 			},
-
-			clearForm() {
-				// TODO: Add clear logic.
-				debug.log("Add logic to clear the form!");
-			}
 		},
 	},
 };
+
+// Initialize forms
+renderer.formRenderer.addMonster.renderForm();
+renderer.formRenderer.filters.renderForm();
