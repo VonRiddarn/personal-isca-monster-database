@@ -1,25 +1,8 @@
-import { generateDropDownFromEnum, generateNumericInputFieldsFromEnum, generateButton } from "./utilities.js";
 import { MonsterColor, MonsterAttribute, NumericFilterMethod } from "./enums.js";
-import { monsters } from "./monster_list.js";
 
 export {
 	getFilteredMonsterArray,
 };
-
-// Find form
-const filteredSearchForm = document.getElementById("filtered-search").querySelector("form");
-
-// Generate inputs
-generateDropDownFromEnum(filteredSearchForm, MonsterColor, "Color", "filtered-search-color", true);
-generateNumericInputFieldsFromEnum(filteredSearchForm, MonsterAttribute, "filtered-search-attribute", true);
-
-// Create submit button
-generateButton(filteredSearchForm, "Search", "filtered-search-form-submit").addEventListener('click', (e) =>
-{
-	e.preventDefault();
-	console.log(getFilteredMonsterArray(monsters));
-});
-
 
 // ----- ----- ----- ----- -----
 function getFilterCriteria()

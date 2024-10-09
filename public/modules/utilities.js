@@ -28,7 +28,7 @@ const utilities = {
 		labelElement.innerHTML = label;
 
 		// <select>
-		generateRawDropDownFromEnum(span, enumToItterate, `${idRoot}-dropdown`);
+		this.generateRawDropDownFromEnum(span, enumToItterate, `${idRoot}-dropdown`);
 	},
 
 	/**
@@ -83,7 +83,7 @@ const utilities = {
 
 			// <select>
 			if (isFilter)
-				generateRawDropDownFromEnum(labelSpan, NumericFilterMethod, `${elementId}-numeric-filter-dropdown`);
+				this.generateRawDropDownFromEnum(labelSpan, NumericFilterMethod, `${elementId}-numeric-filter-dropdown`);
 
 			// <input type="number" />
 			const count = span.appendChild(document.createElement("input"));

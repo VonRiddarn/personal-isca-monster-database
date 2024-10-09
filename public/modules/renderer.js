@@ -1,4 +1,7 @@
+import { getFilteredMonsterArray } from "./filtered_search.js";
 import { utilities } from "./utilities.js";
+import { MonsterColor, MonsterAttribute } from "./enums.js";
+import { monsterList } from "./monster_list.js";
 
 export {
 	renderer
@@ -13,7 +16,11 @@ const filteredSearchForm = document.getElementById("filtered-search").querySelec
 const renderer = {
 
 	cardRenderer : {
-		// TODO: Add card render logic here
+		renderCards(monsterArr, forceRenderAll = false) {
+			let arr = forceRenderAll ? monsterArr : getFilteredMonsterArray(monsterArr);
+			
+			console.log(arr);
+		},
 	},
 
 	formRenderer : {
@@ -56,7 +63,7 @@ const renderer = {
 				utilities.generateButton(filteredSearchForm, "Search", "filtered-search-form-submit").addEventListener('click', (e) =>
 				{
 					e.preventDefault();
-					console.log(getFilteredMonsterArray(monsters));
+					renderer.cardRenderer.renderCards(monsterList.getMonsters(true));
 				});
 			},
 
