@@ -4,6 +4,15 @@ export {
 	monsters
 };
 
+// getMonsters(useDummyList = false)
+/* addMonster(monsterObj)
+{
+	monsterObj.id = nextMonsterId;
+	nextMonsterId++;
+	monsters.push(monsterObj);
+	renderer.updateMonsterListing();
+}*/
+
 const monsters =
 	[
 		{
