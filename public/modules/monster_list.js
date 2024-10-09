@@ -1,4 +1,4 @@
-import { MonsterColor } from "./enums.js";
+import { MonsterColor, MonsterAlignment } from "./enums.js";
 
 export {
 	monsterList

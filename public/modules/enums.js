@@ -1,4 +1,5 @@
 export {
+	MonsterAlignment,
 	MonsterColor,
 	MonsterAttribute,
 	NumericFilterMethod,
