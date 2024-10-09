@@ -13,6 +13,13 @@ export {
 	renderer.updateMonsterListing();
 }*/
 
+
+/*
+	Problem:
+	Should monster list really handle adding monsters to list? 
+	If so, should we rename add_mosnter.js to add_monster_form.js? 
+	Should we rename monster_list to monster_list_manager?
+*/
 const monsters =
 	[
 		{
