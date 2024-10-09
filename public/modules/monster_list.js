@@ -1,33 +1,26 @@
-import { MonsterColor } from "./enums.js";
+import { MonsterAttribute, MonsterColor } from "./enums.js";
 
 export {
-	monsters
+	monsterList
 };
 
-let nexyUid = 0;
+const monsterList = {
 
-// getMonsters(useDummyList = false)
-/* addMonster(monsterObj)
-{
-	monsterObj.id = nextMonsterId;
-	nextMonsterId++;
-	monsters.push(monsterObj);
-	renderer.updateMonsterListing();
-}*/
+	getMonsters(useDummyArray = false) {
+		return useDummyArray ? dummyArray : liveArray;
+	},
 
+	addMonster(monsterObject) {
+		liveArray.push(monsterObject);
+	},
 
-/*
-	Problem:
-	Should monster list really handle adding monsters to list? 
-	If so, should we rename add_mosnter.js to add_monster_form.js? 
-	Should we rename monster_list to monster_list_manager?
-*/
-const monsters =
-	[
+	liveArray: [],
+
+	dummyArray: [
 		{
 			uid: 0,
 			alias: "James P. Sulivan",
-			color: "Blue",
+			color: MonsterColor.Blue,
 			Eyes: 2,
 			Horns: 2,
 			Tails: 1,
@@ -37,7 +30,7 @@ const monsters =
 		{
 			uid: 1,
 			alias: "Mike Wazowski",
-			color: "Green",
+			color: MonsterColor.Green,
 			Eyes: 1,
 			Horns: 2,
 			Tails: 0,
@@ -47,7 +40,7 @@ const monsters =
 		{
 			uid: 2,
 			alias: "Randall Boggs",
-			color: "Purple",
+			color: MonsterColor.Purple,
 			Eyes: 2,
 			Horns: 0,
 			Tails: 1,
@@ -57,7 +50,7 @@ const monsters =
 		{
 			uid: 3,
 			alias: "Celia Mae",
-			color: "Purple",
+			color: MonsterColor.Purple,
 			Eyes: 11,
 			Horns: 0,
 			Tails: 0,
@@ -67,7 +60,7 @@ const monsters =
 		{
 			uid: 4,
 			alias: "Henry J. Watermoose",
-			color: "Blue",
+			color: MonsterColor.Blue,
 			Eyes: 5,
 			Horns: 0,
 			Tails: 0,
@@ -77,7 +70,7 @@ const monsters =
 		{
 			uid: 5,
 			alias: "Fluffy McTentacleface",
-			color: "Purple",
+			color: MonsterColor.Purple,
 			Eyes: 4,
 			Horns: 3,
 			Tails: 2,
@@ -87,7 +80,7 @@ const monsters =
 		{
 			uid: 6,
 			alias: "Sir Slimebottom",
-			color: "Green",
+			color: MonsterColor.Green,
 			Eyes: 1,
 			Horns: 1,
 			Tails: 0,
@@ -97,7 +90,7 @@ const monsters =
 		{
 			uid: 7,
 			alias: "Spikey VonTooth",
-			color: "Red",
+			color: MonsterColor.Red,
 			Eyes: 6,
 			Horns: 4,
 			Tails: 1,
@@ -107,7 +100,7 @@ const monsters =
 		{
 			uid: 8,
 			alias: "Wiggles McGiggles",
-			color: "Green",
+			color: MonsterColor.Green,
 			Eyes: 3,
 			Horns: 0,
 			Tails: 2,
@@ -117,7 +110,7 @@ const monsters =
 		{
 			uid: 9,
 			alias: "Bobby Blobulus",
-			color: "Blue",
+			color: MonsterColor.Blue,
 			Eyes: 7,
 			Horns: 2,
 			Tails: 1,
@@ -127,7 +120,7 @@ const monsters =
 		{
 			uid: 10,
 			alias: "Gurglesworth the Glutton",
-			color: "Red",
+			color: MonsterColor.Red,
 			Eyes: 1,
 			Horns: 1,
 			Tails: 0,
@@ -137,7 +130,7 @@ const monsters =
 		{
 			uid: 11,
 			alias: "Squishy McBounce",
-			color: "Purple",
+			color: MonsterColor.Purple,
 			Eyes: 2,
 			Horns: 0,
 			Tails: 1,
@@ -147,7 +140,7 @@ const monsters =
 		{
 			uid: 12,
 			alias: "Captain Clawtentacle",
-			color: "Red",
+			color: MonsterColor.Red,
 			Eyes: 8,
 			Horns: 5,
 			Tails: 2,
@@ -157,7 +150,7 @@ const monsters =
 		{
 			uid: 13,
 			alias: "Blinko the Eyeful",
-			color: "Blue",
+			color: MonsterColor.Blue,
 			Eyes: 12,
 			Horns: 0,
 			Tails: 0,
@@ -167,7 +160,7 @@ const monsters =
 		{
 			uid: 14,
 			alias: "Puffy Longtail",
-			color: "Purple",
+			color: MonsterColor.Purple,
 			Eyes: 3,
 			Horns: 0,
 			Tails: 3,
@@ -177,7 +170,7 @@ const monsters =
 		{
 			uid: 15,
 			alias: "Scuttles McBugface",
-			color: "Green",
+			color: MonsterColor.Green,
 			Eyes: 2,
 			Horns: 0,
 			Tails: 1,
@@ -187,7 +180,7 @@ const monsters =
 		{
 			uid: 16,
 			alias: "Snaggletooth Joe",
-			color: "Blue",
+			color: MonsterColor.Blue,
 			Eyes: 2,
 			Horns: 1,
 			Tails: 0,
@@ -197,7 +190,7 @@ const monsters =
 		{
 			uid: 17,
 			alias: "Glorp the Blobulous",
-			color: "Green",
+			color: MonsterColor.Green,
 			Eyes: 1,
 			Horns: 0,
 			Tails: 1,
@@ -207,7 +200,7 @@ const monsters =
 		{
 			uid: 18,
 			alias: "Nibbles McFang",
-			color: "Red",
+			color: MonsterColor.Red,
 			Eyes: 3,
 			Horns: 2,
 			Tails: 1,
@@ -217,7 +210,7 @@ const monsters =
 		{
 			uid: 19,
 			alias: "Lurky Darktail",
-			color: "Purple",
+			color: MonsterColor.Purple,
 			Eyes: 4,
 			Horns: 2,
 			Tails: 1,
@@ -227,11 +220,12 @@ const monsters =
 		{
 			uid: 20,
 			alias: "Dr. Snufflesnort",
-			color: "Blue",
+			color: MonsterColor.Blue,
 			Eyes: 9,
 			Horns: 0,
 			Tails: 1,
 			Tentacles: 4,
 			Legs: 2
 		},
-	];
+	],
+};
