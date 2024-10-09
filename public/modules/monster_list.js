@@ -4,20 +4,24 @@ export {
 	monsterList
 };
 
-const monsterList = {
+const monsterList = 
+{
 
-	getMonsters(useDummyArray = false) {
+	getMonsters(useDummyArray = false) 
+	{
 		return useDummyArray ? dummyArray : liveArray;
 	},
 
-	addMonster(monsterObject) {
+	addMonster(monsterObject) 
+	{
 		liveArray.push(monsterObject);
 	},
 };
 
 const liveArray =  [];
 
-const dummyArray = [
+const dummyArray = 
+[
 	{
 		uid: 0,
 		alias: "James P. Sulivan",

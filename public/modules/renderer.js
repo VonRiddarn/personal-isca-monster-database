@@ -12,23 +12,30 @@ const addMonsterForm = document.getElementById("add-monster").querySelector("for
 // Filter form
 const filteredSearchForm = document.getElementById("filtered-search").querySelector("form");
 
-const renderer = {
+const renderer = 
+{
+	cardRenderer : 
+	{
+		renderCards(monsterArr, forceRenderAll = false) 
+		{
 
-	cardRenderer : {
-		renderCards(monsterArr, forceRenderAll = false) {
-			let arr = forceRenderAll ? monsterArr : getFilteredMonsterArray(monsterArr);
-			
-			console.log(arr);
+			let monsters = forceRenderAll ? monsterArr : getFilteredMonsterArray(monsterArr);
+
+
+
 		},
 	},
 
-	formRenderer : {
+	formRenderer : 
+	{
 
-		addMonster: {
+		addMonster: 
+		{
 			/**
 			 * Can be used to clear the form.
 			 */
-			renderForm() {
+			renderForm() 
+			{
 				// Clean slate
 				addMonsterForm.innerHTML = "";
 
@@ -37,7 +44,7 @@ const renderer = {
 				utilities.generateNumericInputFieldsFromEnum(addMonsterForm, MonsterAttribute, "add-monster-attribute");
 
 				// Create submit button
-				utilities.generateButton(addMonsterForm, "Add monster", "add-monster-form-submit").addEventListener('click', (e) =>
+				utilities.generateButton(addMonsterForm, "Add monster", "add-monster-form-submit").addEventListener('click', (e) => 
 				{
 					e.preventDefault();
 					console.log(`Created monster with ID: ${nextMonsterId}`);
@@ -46,12 +53,14 @@ const renderer = {
 			},
 		},
 
-		filters: {
+		filters:
+		{
 
 			/**
 			 * Can be used to clear the form.
 			 */
-			renderForm() {
+			renderForm() 
+			{
 
 				// Clean slate
 				filteredSearchForm.innerHTML = "";

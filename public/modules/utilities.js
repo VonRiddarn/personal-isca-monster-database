@@ -6,7 +6,8 @@ export {
 
 const utilities = {
 
-	generateDropDownFromEnum(parentElement, enumToItterate, label, idRoot, isFilter = false) {
+	generateDropDownFromEnum(parentElement, enumToItterate, label, idRoot, isFilter = false) 
+	{
 		// <span>
 		const span = parentElement.appendChild(document.createElement("span"));
 		span.setAttribute("id", `${idRoot}-span`);
@@ -36,7 +37,8 @@ const utilities = {
 	 * @param {Object} enumToItterate Enum to extract dropdown values from.
 	 * @param {String} id HTML element id of this dropdown to reference it later.
 	 */
-	generateRawDropDownFromEnum(parentElement, enumToItterate, id) {
+	generateRawDropDownFromEnum(parentElement, enumToItterate, id) 
+	{
 		// <select>
 		const select = parentElement.appendChild(document.createElement("select"));
 		select.setAttribute("id", id);
@@ -57,7 +59,8 @@ const utilities = {
 	 * @param {String} idRoot The root name for the created elements. eg: filtered-search-form
 	 * @param {Boolean} isFilter Adds a checkbox and numericFilterEnum to the input.
 	 */
-	generateNumericInputFieldsFromEnum(parentElement, enumToItterate, idRoot, isFilter = false) {
+	generateNumericInputFieldsFromEnum(parentElement, enumToItterate, idRoot, isFilter = false) 
+	{
 		for (const el in enumToItterate) 
 		{
 			const elementId = `${idRoot}-${el}`;
@@ -92,7 +95,8 @@ const utilities = {
 		}
 	},
 
-	generateButton(parentElement, label, id) {
+	generateButton(parentElement, label, id) 
+	{
 		const btn = parentElement.appendChild(document.createElement("button"));
 		btn.setAttribute("id", id);
 		btn.innerHTML = label;

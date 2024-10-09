@@ -5,7 +5,9 @@ export {
 };
 
 // Color enum
-const MonsterColor = Object.freeze( {
+const MonsterColor = Object.freeze
+( 
+	{
 		Red: "Red",
 		Green: "Green",
 		Blue: "Blue",
@@ -15,7 +17,9 @@ const MonsterColor = Object.freeze( {
 
 
 // Attributes enum
-const MonsterAttribute = Object.freeze( {
+const MonsterAttribute = Object.freeze
+(
+	{
 		Horns: "Horns",
 		Eyes: "Eyes",
 		Legs: "Legs",
@@ -25,7 +29,9 @@ const MonsterAttribute = Object.freeze( {
 );
 
 // Filtered search enum
-const NumericFilterMethod = Object.freeze( {
+const NumericFilterMethod = Object.freeze
+(
+	{
 		LessThan: "<",
 		EqualTo: "=",
 		GreaterThan: ">",
