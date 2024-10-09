@@ -4,7 +4,8 @@ export {
 	utilities,
 };
 
-const utilities = {
+const utilities = 
+{
 
 	generateDropDownFromEnum(parentElement, enumToItterate, label, idRoot, isFilter = false) 
 	{
