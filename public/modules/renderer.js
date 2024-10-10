@@ -1,6 +1,6 @@
 import { getFilteredMonsterArray } from "./filtered_search.js";
 import { utilities } from "./utilities.js";
-import { MonsterColor, MonsterAttribute, InputType } from "./enums.js";
+import { MonsterColor, MonsterAttribute, InputType, MonsterAlignment } from "./enums.js";
 import { monsterList } from "./monster_list.js";
 
 export {
@@ -16,7 +16,6 @@ const main = document.querySelector("main");
 
 function generateConvertableElement(parentElement, elementType, textContent, className)
 {
-	// Alignment
 	const el = parentElement.appendChild(document.createElement(elementType));
 	el.textContent = textContent;
 	el.className = className;
@@ -102,6 +101,7 @@ const renderer =
 				filteredSearchForm.innerHTML = "";
 
 				// Generate inputs
+				utilities.generateDropDownFromEnum(filteredSearchForm, MonsterAlignment, "Alignment", "filtered-search-alignment", true);
 				utilities.generateDropDownFromEnum(filteredSearchForm, MonsterColor, "Color", "filtered-search-color", true);
 				utilities.generateNumericInputFieldsFromEnum(filteredSearchForm, MonsterAttribute, "filtered-search-attribute", true);
 
@@ -110,7 +110,7 @@ const renderer =
 				{
 					e.preventDefault();
 					renderer.cardRenderer.renderCards(monsterList.getMonsters(true));
-					renderer.formRenderer.filters.renderForm();
+					//renderer.formRenderer.filters.renderForm();
 				});
 			},
 		},

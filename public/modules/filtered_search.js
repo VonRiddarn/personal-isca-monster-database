@@ -10,12 +10,16 @@ function getFilterCriteria()
 
 	const fc = 
 	{
+		alignment: null,
 		color: null,
 		attributes: {},
 	};
 	
 	if(document.getElementById("filtered-search-color-isactive").checked)
 		fc.color = document.getElementById("filtered-search-color-dropdown").value
+
+	if (document.getElementById("filtered-search-alignment-isactive").checked)
+		fc.alignment = document.getElementById("filtered-search-alignment-dropdown").value
 	
 	for (const attribute in MonsterAttribute) 
 	{
@@ -51,6 +55,10 @@ function getFilteredMonsterArray(monstersArr)
 	// Filter : Goes through and makes a conditional on each element, if true, pass to reutrn array
 	return monstersArr.filter(monster => 
 	{
+
+		// If alignment filter exists, and we do NOT match.
+		if (filterCriteria.alignment != null && monster.alignment !== filterCriteria.alignment)
+			return false;
 
 		// If color filter exists, and we do NOT match.
 		if (filterCriteria.color != null && monster.color !== filterCriteria.color)
