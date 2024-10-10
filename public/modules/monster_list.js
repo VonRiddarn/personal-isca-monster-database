@@ -15,6 +15,7 @@ const monsterList =
 	deleteMonster(id)
 	{
 		dummyArray = dummyArray.filter((monster => monster.uid !== id));
+		return dummyArray;
 	},
 
 	addMonster(monsterObject) 

@@ -37,6 +37,12 @@ const renderer =
 				card.className = "monster-card";
 				card.id = `monster-card-${monster.uid}`;
 
+				utilities.generateButton(card, "Delete", `monster-delete-${monster.uid}`).addEventListener('click', (e) => 
+				{
+					e.preventDefault();
+					this.renderCards(monsterList.deleteMonster(monster.uid));
+				});
+
 				// Profile
 				const cardProfile = card.appendChild(document.createElement("section"));
 
