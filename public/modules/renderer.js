@@ -26,6 +26,20 @@ function generateConvertableElement(parentElement, elementType, textContent, cla
 	el.className = className;
 }*/
 
+function toggleButtonSpans(isEditing, deleteEditSpan, saveCancelSpan)
+{
+	if(isEditing)
+	{
+		deleteEditSpan.setAttribute("style", "visibility: hidden;");
+		saveCancelSpan.removeAttribute("style");
+		return;
+	}
+
+	deleteEditSpan.removeAttribute("style");
+	saveCancelSpan.setAttribute("style", "visibility: hidden;");
+
+}
+
 const renderer = 
 {
 	cardRenderer : 
@@ -42,7 +56,7 @@ const renderer =
 				card.className = "monster-card";
 				card.id = `monster-card-${monster.uid}`;
 
-				const btnSpan = card.appendChild(document.createElement("span"));
+				const deleteEditSpan = card.appendChild(document.createElement("span"));
 
 				// TODO:
 				/*
@@ -50,7 +64,7 @@ const renderer =
 					If class exist, do not accept Delete or Edit input
 					Add when editing, remove when done editing
 				*/
-				utilities.generateButton(btnSpan, "Delete", null).addEventListener('click', (e) => 
+				utilities.generateButton(deleteEditSpan, "Delete", null).addEventListener('click', (e) => 
 				{
 					e.preventDefault();
 					this.renderCards(monsterList.deleteMonster(monster.uid));
@@ -59,9 +73,10 @@ const renderer =
 					console.log("--- ---")
 				});
 				
-				utilities.generateButton(btnSpan, "Edit", null).addEventListener('click', (e) => 
+				utilities.generateButton(deleteEditSpan, "Edit", null).addEventListener('click', (e) => 
 				{
 					e.preventDefault();
+					toggleButtonSpans(true, deleteEditSpan, saveCancelSpan);
 					openMonsterEditorOnCard(card, monster);
 					console.log(`--- OPENED EDIT FORM FOR MONSTER ---`);
 					console.log(monster);
@@ -84,6 +99,27 @@ const renderer =
 					const statElement = cardStats.appendChild(document.createElement("li"));
 					statElement.textContent = `${stat}: ${monster.stats[stat]}`;
 				}
+
+				const saveCancelSpan = card.appendChild(document.createElement("span"));
+				saveCancelSpan.setAttribute("style", "visibility: hidden;");
+
+
+				utilities.generateButton(saveCancelSpan, "Save", null).addEventListener('click', (e) => 
+				{
+					e.preventDefault();
+					toggleButtonSpans(false, deleteEditSpan, saveCancelSpan);
+					console.log(`--- MONSTER SAVED ---`);
+					console.log(monster);
+					console.log("--- ---")
+				});
+
+				utilities.generateButton(saveCancelSpan, "Cancel", null).addEventListener('click', (e) => 
+				{
+					e.preventDefault();
+					toggleButtonSpans(false, deleteEditSpan, saveCancelSpan);
+					openMonsterEditorOnCard(card, monster);
+
+				});
 
 			}
 
