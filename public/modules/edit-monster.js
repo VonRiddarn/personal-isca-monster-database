@@ -2,7 +2,7 @@ export {
 	openMonsterEditorOnCard,
 };
 
-function openMonsterEditorOnCard(id)
+function openMonsterEditorOnCard(articleElement, monsterObject)
 {
-	document.querySelector(`.monster-card-${id}`);
+	
 }
