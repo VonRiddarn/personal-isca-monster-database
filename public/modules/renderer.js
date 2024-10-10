@@ -14,12 +14,16 @@ const filteredSearchForm = document.getElementById("filtered-search").querySelec
 
 const main = document.querySelector("main");
 
+/*
+Depreciated!
+Reason: Overengineering.
+We will instead make assumptions of our objects.
 function generateConvertableElement(parentElement, elementType, textContent, className)
 {
 	const el = parentElement.appendChild(document.createElement(elementType));
 	el.textContent = textContent;
 	el.className = className;
-}
+}*/
 
 const renderer = 
 {
@@ -50,9 +54,9 @@ const renderer =
 				const cardProfile = card.appendChild(document.createElement("section"));
 
 				// Profile stuff
-				generateConvertableElement(cardProfile, "h3", `${monster.alias}`, `${InputType.TextField}`);
-				generateConvertableElement(cardProfile, "p", `Alignment: ${monster.alignment}`, `${InputType.Dropdown} enum-MonsterAlignment`);
-				generateConvertableElement(cardProfile, "p", `Color: ${monster.color}`, `${InputType.Dropdown} enum-MonsterColor`);
+				cardProfile.appendChild(document.createElement("h3")).textContent = `${monster.alias}`;
+				cardProfile.appendChild(document.createElement("p")).textContent = `Alignment: ${monster.alignment}`;
+				cardProfile.appendChild(document.createElement("p")).textContent = `Color: ${ monster.color }`;
 
 				// Stats
 				const cardStats = card.appendChild(document.createElement("section")).appendChild(document.createElement("ul"));
@@ -60,7 +64,6 @@ const renderer =
 				for (const stat in monster.stats) 
 				{
 					const statElement = cardStats.appendChild(document.createElement("li"));
-					statElement.className = `${InputType.Numeric} attribute-name-${stat} attribute-value-${monster.stats[stat]}`;
 					statElement.textContent = `${stat}: ${monster.stats[stat]}`;
 				}
 
