@@ -46,6 +46,35 @@ main
 {
 	grid-area: main;
 	background-color: var(--isca-background-light);
+
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 1rem;
+
+	article
+	{
+		background-color: var(--isca-accent);
+		max-width: 250px;
+
+		padding: 1rem;
+
+		section
+		{
+			text-align: center;
+
+			ul
+			{
+				text-align: left;
+				list-style: none;
+				padding: 0;
+			}
+		}
+
+		section:not(:last-child)
+		{
+			border-bottom: solid black;
+		}
+	}
 }
 
 footer
