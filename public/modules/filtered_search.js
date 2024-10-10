@@ -72,11 +72,11 @@ function getFilteredMonsterArray(monstersArr)
 			{
 
 				// Skip if attribute does not exist on monster.
-				if(monster[attributeKey] === undefined)
+				if(monster.stats[attributeKey] === undefined)
 					continue;
 				
 				// Current monster attribute >count< saved in value
-				const value = monster[attributeKey]; 
+				const value = monster.stats[attributeKey]; 
 
 				// Translate filterCondition object into 2 variables for clarity
 				const { filterMethod, amount } = filterCondition;
