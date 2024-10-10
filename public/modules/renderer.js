@@ -41,6 +41,9 @@ const renderer =
 				{
 					e.preventDefault();
 					this.renderCards(monsterList.deleteMonster(monster.uid));
+					console.log(`--- MONSTER REMOVED ---`);
+					console.log(monster);
+					console.log("--- ---")
 				});
 
 				// Profile
