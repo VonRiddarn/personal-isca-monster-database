@@ -3,6 +3,7 @@ export {
 	MonsterColor,
 	MonsterAttribute,
 	NumericFilterMethod,
+	InputType,
 };
 
 // Alignment enum
