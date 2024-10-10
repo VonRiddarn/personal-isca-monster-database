@@ -1,6 +1,6 @@
 import { getFilteredMonsterArray } from "./filtered_search.js";
 import { utilities } from "./utilities.js";
-import { MonsterColor, MonsterAttribute } from "./enums.js";
+import { MonsterColor, MonsterAttribute, InputType } from "./enums.js";
 import { monsterList } from "./monster_list.js";
 
 export {
@@ -12,15 +12,51 @@ const addMonsterForm = document.getElementById("add-monster").querySelector("for
 // Filter form
 const filteredSearchForm = document.getElementById("filtered-search").querySelector("form");
 
+const main = document.querySelector("main");
+
+function generateConvertableElement(parentElement, elementType, textContent, className)
+{
+	// Alignment
+	const el = parentElement.appendChild(document.createElement(elementType));
+	el.textContent = textContent;
+	el.className = className;
+}
+
 const renderer = 
 {
 	cardRenderer : 
 	{
 		renderCards(monsterArr, forceRenderAll = false) 
 		{
-
 			let monsters = forceRenderAll ? monsterArr : getFilteredMonsterArray(monsterArr);
+			main.innerHTML = "";
 
+			for (const monster of monsters) 
+			{
+				// Initialize card
+				const card = main.appendChild(document.createElement("article"));
+				card.className = "monster-card";
+				card.id = `monster-card-${monster.uid}`;
+
+				// Profile
+				const cardProfile = card.appendChild(document.createElement("section"));
+
+				// Profile stuff
+				generateConvertableElement(cardProfile, "h3", `${monster.alias}`, `${InputType.TextField}`);
+				generateConvertableElement(cardProfile, "p", `Alignment: ${monster.alignment}`, `${InputType.Dropdown} enum-MonsterAlignment`);
+				generateConvertableElement(cardProfile, "p", `Color: ${monster.color}`, `${InputType.Dropdown} enum-MonsterColor`);
+
+				// Stats
+				const cardStats = card.appendChild(document.createElement("section")).appendChild(document.createElement("ul"));
+
+				for (const stat in monster.stats) 
+				{
+					const statElement = cardStats.appendChild(document.createElement("li"));
+					statElement.className = `${InputType.Numeric} attribute-name-${stat} attribute-value-${monster.stats[stat]}`;
+					statElement.textContent = `${stat}: ${monster.stats[stat]}`;
+				}
+
+			}
 
 
 		},
