@@ -99,8 +99,10 @@ const utilities =
 	generateButton(parentElement, label, id) 
 	{
 		const btn = parentElement.appendChild(document.createElement("button"));
-		btn.setAttribute("id", id);
 		btn.innerHTML = label;
+
+		if(id !== null)
+			btn.setAttribute("id", id);
 
 		return btn;
 	},
