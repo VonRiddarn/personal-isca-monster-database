@@ -12,15 +12,20 @@ const monsterList =
 		return useDummyArray ? dummyArray : liveArray;
 	},
 
+	deleteMonster(id)
+	{
+		dummyArray = dummyArray.filter((monster => monster.uid !== id));
+	},
+
 	addMonster(monsterObject) 
 	{
 		liveArray.push(monsterObject);
 	},
 };
 
-const liveArray =  [];
+let liveArray =  [];
 
-const dummyArray =
+let dummyArray =
 	[
 		{
 			uid: 0,
