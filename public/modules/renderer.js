@@ -2,6 +2,7 @@ import { getFilteredMonsterArray } from "./filtered-search.js";
 import { utilities } from "./utilities.js";
 import { MonsterColor, MonsterAttribute, InputType, MonsterAlignment } from "./enums.js";
 import { monsterList } from "./monster-list.js";
+import { openMonsterEditorOnCard } from "./edit-monster.js";
 
 export {
 	renderer
@@ -41,11 +42,28 @@ const renderer =
 				card.className = "monster-card";
 				card.id = `monster-card-${monster.uid}`;
 
-				utilities.generateButton(card, "Delete", `monster-delete-${monster.uid}`).addEventListener('click', (e) => 
+				const btnSpan = card.appendChild(document.createElement("span"));
+
+				// TODO:
+				/*
+					Add class to card: isediting
+					If class exist, do not accept Delete or Edit input
+					Add when editing, remove when done editing
+				*/
+				utilities.generateButton(btnSpan, "Delete", null).addEventListener('click', (e) => 
 				{
 					e.preventDefault();
 					this.renderCards(monsterList.deleteMonster(monster.uid));
 					console.log(`--- MONSTER REMOVED ---`);
+					console.log(monster);
+					console.log("--- ---")
+				});
+				
+				utilities.generateButton(btnSpan, "Edit", null).addEventListener('click', (e) => 
+				{
+					e.preventDefault();
+					openMonsterEditorOnCard(card, monster);
+					console.log(`--- OPENED EDIT FORM FOR MONSTER ---`);
 					console.log(monster);
 					console.log("--- ---")
 				});
