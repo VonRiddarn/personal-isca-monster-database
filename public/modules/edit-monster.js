@@ -1,28 +1,53 @@
-import { InputType } from "./enums.js";
+import { InputType, MonsterAlignment, MonsterAttribute, MonsterColor } from "./enums.js";
+import { utilities } from "./utilities.js";
 
 export {
 	openMonsterEditorOnCard,
 };
 
-function generateInputAndReplace(elementToReplace, inputType, dropDownEnum)
+let nextUniqueId = 0;
+
+function generateInputAndReplace(elementToReplace, inputType, labelText, dropDownEnum)
 {
-	const el = null;
+	// TODO: Convert P-tag to label later.
+	const span = document.createElement("span");
+	const label = document.createElement("label");
+	label.textContent = labelText;
+
+	let el = null;
+	let value = elementToReplace.textContent;
+	
+	if(value.includes(":"))
+		value = value.split(":")[1].trim();
 
 	switch(inputType)
 	{
 		case InputType.Text:
-			el = document.createAttribute("input");
-			el.setAttribute("value", elementToReplace.textContent);
+			el = document.createElement("input");
+			el.setAttribute("value", value);
 			el.setAttribute("type", "text");
 		break;
 		case InputType.Dropdown:
-			el = document.createAttribute("select");
-
-			el.setAttribute("value", elementToReplace.split(":")[1].trim());
+			el = utilities.generateRawDropDownFromEnum(dropDownEnum);
+			el.setAttribute("value", value);
+		break;
+		case InputType.Numeric:
+			el = document.createElement("input");
+			el.setAttribute("value", value);
+			el.setAttribute("type", "number");
+		break;
 	}
 
-	el.setAttribute("value", h3.textContent);
-	el.setAttribute("type", "text");
+	const eid = `label-id-connector-${nextUniqueId}`;
+	el.id = eid;
+	label.setAttribute("for", eid)
+	nextUniqueId++;
+
+	span.appendChild(label);
+	span.appendChild(el);
+
+	elementToReplace.parentElement.replaceChild(span, elementToReplace);
+	return span;
 }
 
 // Returns true or false depending on if the form could be created.
@@ -40,11 +65,12 @@ function openMonsterEditorOnCard(articleElement, monsterObject)
 	const colorElement = articleElement.querySelectorAll("section p")[1];
 	const attributeElements = articleElement.querySelector("ul").children;
 
-	const aliasInputField = document.createElement("input");
-	const alignmentInput = document.createAttribute("input");
-	//nameInput.setAttribute("type", "text");
-	//nameInput.setAttribute("value", h3.textContent);
+	generateInputAndReplace(aliasElement, InputType.Text, "Name:", null);
+	generateInputAndReplace(alignmentElement, InputType.Dropdown, "Alignment:", MonsterAlignment);
+	generateInputAndReplace(colorElement, InputType.Dropdown, "Color: ", MonsterColor);
 
-	//h3.parentElement.replaceChild(nameInput, h3);
-
+	for (let i = 0; i < attributeElements.length; i++) 
+	{
+		generateInputAndReplace(attributeElements[i], InputType.Numeric, utilities.getObjectKeynameFromIndex(MonsterAttribute, i), null);
+	}
 }
