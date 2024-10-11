@@ -24,16 +24,16 @@ function generateInputAndReplace(elementToReplace, inputType, labelText, dropDow
 	{
 		case InputType.Text:
 			el = document.createElement("input");
-			el.setAttribute("value", value);
+			el.value = value;
 			el.setAttribute("type", "text");
 		break;
 		case InputType.Dropdown:
 			el = utilities.generateRawDropDownFromEnum(dropDownEnum);
-			el.setAttribute("value", value);
+			el.value = value; // Could technically be bad input if something is changed at runtime :shrug:
 		break;
 		case InputType.Numeric:
 			el = document.createElement("input");
-			el.setAttribute("value", value);
+			el.value = value;
 			el.setAttribute("type", "number");
 		break;
 	}
