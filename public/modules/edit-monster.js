@@ -71,6 +71,6 @@ function openMonsterEditorOnCard(articleElement, monsterObject)
 
 	for (let i = 0; i < attributeElements.length; i++) 
 	{
-		generateInputAndReplace(attributeElements[i], InputType.Numeric, utilities.getObjectKeynameFromIndex(MonsterAttribute, i), null);
+		generateInputAndReplace(attributeElements[i], InputType.Numeric, utilities.getObjectKeynameFromIndex(monsterObject.stats, i), null);
 	}
 }
