@@ -1,4 +1,4 @@
-import { NumericFilterMethod } from "./enums.js";
+import { MonsterAttribute, NumericFilterMethod } from "./enums.js";
 
 export {
 	utilities,
@@ -118,4 +118,9 @@ const utilities =
 
 		return btn;
 	},
+
+	getObjectKeynameFromIndex(object, index)
+	{ 
+		return Object.keys(object)[index] || null;
+	}
 }
