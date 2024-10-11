@@ -117,8 +117,6 @@ const renderer =
 				{
 					e.preventDefault();
 					toggleButtonSpans(false, deleteEditSpan, saveCancelSpan);
-					openMonsterEditorOnCard(card, monster);
-
 				});
 
 			}
