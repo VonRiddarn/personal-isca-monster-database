@@ -7,11 +7,12 @@ export {
 const utilities = 
 {
 
-	generateDropDownFromEnum(parentElement, enumToItterate, label, idRoot, isFilter = false) 
+	generateDropDownFromEnum(enumToItterate, label, idRoot = null, isFilter = false) 
 	{
 		// <span>
-		const span = parentElement.appendChild(document.createElement("span"));
-		span.setAttribute("id", `${idRoot}-span`);
+		const span = document.createElement("span");
+		if(idRoot)
+			span.setAttribute("id", `${idRoot}-span`);
 
 		// <span> label
 		const labelSpan = span.appendChild(document.createElement("span"));
@@ -30,7 +31,9 @@ const utilities =
 		labelElement.innerHTML = label;
 
 		// <select>
-		this.generateRawDropDownFromEnum(span, enumToItterate, `${idRoot}-dropdown`);
+		span.appendChild(this.generateRawDropDownFromEnum(enumToItterate, `${idRoot}-dropdown`));
+
+		return span;
 	},
 
 	/**
@@ -38,11 +41,12 @@ const utilities =
 	 * @param {Object} enumToItterate Enum to extract dropdown values from.
 	 * @param {String} id HTML element id of this dropdown to reference it later.
 	 */
-	generateRawDropDownFromEnum(parentElement, enumToItterate, id) 
+	generateRawDropDownFromEnum(enumToItterate, id = null) 
 	{
 		// <select>
-		const select = parentElement.appendChild(document.createElement("select"));
-		select.setAttribute("id", id);
+		const select = document.createElement("select");
+		if(id)
+			select.setAttribute("id", id);
 
 		// Add all enum elements
 		// <option value="e"> e </>
@@ -52,6 +56,8 @@ const utilities =
 			opt.setAttribute("value", `${enumToItterate[e]}`);
 			opt.innerHTML = `${enumToItterate[e]}`;
 		}
+
+		return select;
 	},
 	/**
 	 * 
@@ -60,14 +66,16 @@ const utilities =
 	 * @param {String} idRoot The root name for the created elements. eg: filtered-search-form
 	 * @param {Boolean} isFilter Adds a checkbox and numericFilterEnum to the input.
 	 */
-	generateNumericInputFieldsFromEnum(parentElement, enumToItterate, idRoot, isFilter = false) 
+	generateNumericInputFieldsFromEnum(enumToItterate, idRoot, isFilter = false) 
 	{
+		const returnArr = [];
+		
 		for (const el in enumToItterate) 
 		{
 			const elementId = `${idRoot}-${el}`;
 
 			// <span> GENERIC
-			const span = parentElement.appendChild(document.createElement("span"));
+			const span = document.createElement("span");
 			span.setAttribute("class", `${idRoot}-span`);
 
 			const labelSpan = span.appendChild(document.createElement("span"));
@@ -93,15 +101,19 @@ const utilities =
 			const count = span.appendChild(document.createElement("input"));
 			count.setAttribute("type", "number");
 			count.setAttribute("id", `${elementId}-count`);
+
+			returnArr.push(span);
 		}
+
+		return returnArr;
 	},
 
-	generateButton(parentElement, label, id) 
+	generateButton(label, id) 
 	{
-		const btn = parentElement.appendChild(document.createElement("button"));
+		const btn = document.createElement("button");
 		btn.innerHTML = label;
 
-		if(id !== null)
+		if(id)
 			btn.setAttribute("id", id);
 
 		return btn;

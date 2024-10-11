@@ -64,7 +64,7 @@ const renderer =
 					If class exist, do not accept Delete or Edit input
 					Add when editing, remove when done editing
 				*/
-				utilities.generateButton(deleteEditSpan, "Delete", null).addEventListener('click', (e) => 
+				deleteEditSpan.appendChild(utilities.generateButton("Delete", null)).addEventListener('click', (e) =>
 				{
 					e.preventDefault();
 					this.renderCards(monsterList.deleteMonster(monster.uid));
@@ -73,7 +73,7 @@ const renderer =
 					console.log("--- ---")
 				});
 				
-				utilities.generateButton(deleteEditSpan, "Edit", null).addEventListener('click', (e) => 
+				deleteEditSpan.appendChild(utilities.generateButton("Edit", null)).addEventListener('click', (e) =>
 				{
 					e.preventDefault();
 					toggleButtonSpans(true, deleteEditSpan, saveCancelSpan);
@@ -104,7 +104,7 @@ const renderer =
 				saveCancelSpan.setAttribute("style", "visibility: hidden;");
 
 
-				utilities.generateButton(saveCancelSpan, "Save", null).addEventListener('click', (e) => 
+				saveCancelSpan.appendChild(utilities.generateButton("Save", null)).addEventListener('click', (e) =>
 				{
 					e.preventDefault();
 					toggleButtonSpans(false, deleteEditSpan, saveCancelSpan);
@@ -113,7 +113,7 @@ const renderer =
 					console.log("--- ---")
 				});
 
-				utilities.generateButton(saveCancelSpan, "Cancel", null).addEventListener('click', (e) => 
+				saveCancelSpan.appendChild(utilities.generateButton("Cancel", null)).addEventListener('click', (e) =>
 				{
 					e.preventDefault();
 					toggleButtonSpans(false, deleteEditSpan, saveCancelSpan);
@@ -138,12 +138,15 @@ const renderer =
 				// Clean slate
 				addMonsterForm.innerHTML = "";
 
-				// Generate inputs 
-				utilities.generateDropDownFromEnum(addMonsterForm, MonsterColor, "Color", "add-monster-color");
-				utilities.generateNumericInputFieldsFromEnum(addMonsterForm, MonsterAttribute, "add-monster-attribute");
+				// Generate inputs
+				addMonsterForm.appendChild(utilities.generateDropDownFromEnum(MonsterColor, "Color", "add-monster-color"));
+				for (const el of utilities.generateNumericInputFieldsFromEnum(MonsterAttribute, "add-monster-attribute")) 
+				{	
+					addMonsterForm.appendChild(el);
+				}
 
 				// Create submit button
-				utilities.generateButton(addMonsterForm, "Add monster", "add-monster-form-submit").addEventListener('click', (e) => 
+				addMonsterForm.appendChild(utilities.generateButton("Add monster", "add-monster-form-submit")).addEventListener('click', (e) =>
 				{
 					e.preventDefault();
 					console.log(`Created monster with ID: ${nextMonsterId}`);
@@ -165,12 +168,16 @@ const renderer =
 				filteredSearchForm.innerHTML = "";
 
 				// Generate inputs
-				utilities.generateDropDownFromEnum(filteredSearchForm, MonsterAlignment, "Alignment", "filtered-search-alignment", true);
-				utilities.generateDropDownFromEnum(filteredSearchForm, MonsterColor, "Color", "filtered-search-color", true);
-				utilities.generateNumericInputFieldsFromEnum(filteredSearchForm, MonsterAttribute, "filtered-search-attribute", true);
+				filteredSearchForm.appendChild(utilities.generateDropDownFromEnum(MonsterAlignment, "Alignment", "filtered-search-alignment", true));
+				filteredSearchForm.appendChild(utilities.generateDropDownFromEnum(MonsterColor, "Color", "filtered-search-color", true));
+
+				for (const el of utilities.generateNumericInputFieldsFromEnum(MonsterAttribute, "filtered-search-attribute", true)) 
+				{
+					filteredSearchForm.appendChild(el);
+				}
 
 				// Create submit button
-				utilities.generateButton(filteredSearchForm, "Search", "filtered-search-form-submit").addEventListener('click', (e) =>
+				filteredSearchForm.appendChild(utilities.generateButton("Search", "filtered-search-form-submit")).addEventListener('click', (e) =>
 				{
 					e.preventDefault();
 					renderer.cardRenderer.renderCards(monsterList.getMonsters(true));

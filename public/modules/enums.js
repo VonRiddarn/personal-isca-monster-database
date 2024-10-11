@@ -54,9 +54,8 @@ const NumericFilterMethod = Object.freeze
 const InputType = Object.freeze
 (
 	{
-		SearchClause: "input-type",
-		TextField: "input-type-textfield",
-		Dropdown: "input-type-dropdown",
-		Numeric: "input-type-numeric",
+		Text: "Text",
+		Dropdown: "Dropdown",
+		Numeric: "Numeric",
 	}
 );
