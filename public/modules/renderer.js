@@ -26,18 +26,11 @@ function generateConvertableElement(parentElement, elementType, textContent, cla
 	el.className = className;
 }*/
 
-function toggleButtonSpans(isEditing, deleteEditSpan, saveCancelSpan)
+function toggleButtonSpans(card, isEditing, deleteEditSpan, saveCancelSpan)
 {
-	if(isEditing)
-	{
-		deleteEditSpan.setAttribute("style", "visibility: hidden;");
-		saveCancelSpan.removeAttribute("style");
-		return;
-	}
-
-	deleteEditSpan.removeAttribute("style");
-	saveCancelSpan.setAttribute("style", "visibility: hidden;");
-
+	card.className = isEditing ? "monster-card isediting" : "monster-card";
+	deleteEditSpan.style = isEditing ? "display: none;" : "";
+	saveCancelSpan.style = isEditing ? "" : "display: none"
 }
 
 function generateCardContent(card, monster)
@@ -57,7 +50,7 @@ function generateCardContent(card, monster)
 	deleteEditSpan.appendChild(utilities.generateButton("Edit", null)).addEventListener('click', (e) =>
 	{
 		e.preventDefault();
-		toggleButtonSpans(true, deleteEditSpan, saveCancelSpan);
+		toggleButtonSpans(card, true, deleteEditSpan, saveCancelSpan);
 		openMonsterEditorOnCard(card, monster);
 	});
 
@@ -85,7 +78,7 @@ function generateCardContent(card, monster)
 	saveCancelSpan.appendChild(utilities.generateButton("Save", null)).addEventListener('click', (e) =>
 	{
 		e.preventDefault();
-		toggleButtonSpans(false, deleteEditSpan, saveCancelSpan);
+		toggleButtonSpans(card, false, deleteEditSpan, saveCancelSpan);
 		const newMonster = closeMonsterEditorOnCard(card, monster, true);
 		console.log("----- MONSTER CHANGED -----")
 		console.log(monster);
@@ -99,7 +92,7 @@ function generateCardContent(card, monster)
 	{
 		e.preventDefault();
 		closeMonsterEditorOnCard(card, monster, false);
-		toggleButtonSpans(false, deleteEditSpan, saveCancelSpan);
+		toggleButtonSpans(card, false, deleteEditSpan, saveCancelSpan);
 	});
 }
 
