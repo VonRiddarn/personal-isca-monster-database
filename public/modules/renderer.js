@@ -59,7 +59,6 @@ function generateCardContent(card, monster)
 	deleteEditSpan.appendChild(utilities.generateButton("Edit", null)).addEventListener('click', (e) =>
 	{
 		e.preventDefault();
-		card.className = "monster-card isediting";
 		toggleButtonSpans(true, deleteEditSpan, saveCancelSpan);
 		openMonsterEditorOnCard(card, monster);
 	});
@@ -126,10 +125,6 @@ const renderer =
 			}
 
 			currentArray = monsterArr;
-
-		},
-		remove(uid)
-		{
 
 		},
 		replace(card, newMonsterObject)
