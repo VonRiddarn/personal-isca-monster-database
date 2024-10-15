@@ -4,18 +4,21 @@ export {
 	monsterList
 };
 
+const useDummyArray = true;
+
 const monsterList = 
 {
 
-	getMonsters(useDummyArray = false) 
+	getMonsters() 
 	{
 		return useDummyArray ? dummyArray : liveArray;
 	},
 
 	deleteMonster(id)
 	{
-		dummyArray = dummyArray.filter((monster => monster.uid !== id));
-		return dummyArray;
+		let returnArray = this.getMonsters(useDummyArray);
+		returnArray = returnArray.filter((monster => monster.uid !== id));
+		return returnArray;
 	},
 
 	addMonster(monsterObject) 
