@@ -1,8 +1,11 @@
 import { InputType, MonsterAlignment, MonsterAttribute, MonsterColor } from "./enums.js";
+import { monsterList } from "./monster-list.js";
+import { renderer } from "./renderer.js";
 import { utilities } from "./utilities.js";
 
 export {
 	openMonsterEditorOnCard,
+	closeMonsterEditorOnCard,
 };
 
 let nextUniqueId = 0;
@@ -73,4 +76,59 @@ function openMonsterEditorOnCard(articleElement, monsterObject)
 	{
 		generateInputAndReplace(attributeElements[i], InputType.Numeric, utilities.getObjectKeynameFromIndex(monsterObject.stats, i), null);
 	}
+}
+
+// Returns true or false depending on if the form could be created.
+function closeMonsterEditorOnCard(articleElement, monsterObject, saveChanges)
+{
+	// Type check to get auto complete
+	if(!(articleElement instanceof HTMLElement))
+	{
+		console.warn(`${articleElement} is NOT of type HTMLElement. Aborting!`);
+		return false;
+	}
+
+	articleElement.className = "monster-card";
+
+	if(!saveChanges)
+	{
+		renderer.cardRenderer.replace(articleElement, monsterObject);
+		return monsterObject;
+	}
+
+	const mockMonster = {};
+	mockMonster.uid = monsterObject.uid;
+	mockMonster.stats = {};
+
+	const sections = articleElement.querySelectorAll("section");
+
+	const aliasElement = sections[0].children[0].querySelector("input");
+	mockMonster.alias = saveChanges ? aliasElement.value : monsterObject.alias;
+
+	const alignmentElement = sections[0].children[1].querySelector("select");
+	mockMonster.alignment = saveChanges ? alignmentElement.value : monsterObject.alignment;
+	
+	const colorElement = sections[0].children[2].querySelector("select");
+	mockMonster.color = saveChanges ? colorElement.value : monsterObject.color;
+
+	const attributeSpans = articleElement.querySelector("ul").children;
+
+	for (let i = 0; i < attributeSpans.length; i++) 
+	{
+		const attributeElement = attributeSpans[i].querySelector("input");
+		const attributeName = attributeSpans[i].querySelector("label").innerHTML;
+		mockMonster.stats[attributeName] = saveChanges ? attributeElement.value : monsterObject.stats[attributeName];
+	}
+
+	// Apply to object
+	const monArr = monsterList.getMonsters();
+	const mon = monArr.find((monster) => monster.uid === mockMonster.uid);
+
+	for (const key in mon) 
+	{
+    	mon[key] = mockMonster[key];
+  	}
+
+	renderer.cardRenderer.replace(articleElement, mockMonster);
+	return mockMonster;
 }
