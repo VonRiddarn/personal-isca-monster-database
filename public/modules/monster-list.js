@@ -14,18 +14,16 @@ const monsterList =
 		return useDummyArray ? dummyArray : liveArray;
 	},
 
-	deleteMonster(id)
+	deleteMonster(id) 
 	{
-		let returnArray = this.getMonsters();
-		returnArray = returnArray.filter((monster => monster.uid !== id));
+		const monstersArray = this.getMonsters();
+		const index = monstersArray.findIndex(monster => monster.uid === id);
 
-		// Scuffed solution tbh, fast fix
-		if(useDummyArray)
-			dummyArray = returnArray;
-		else
-			liveArray = returnArray;
+		if (index !== -1) {
+			monstersArray.splice(index, 1);
+		}
 
-		return returnArray;
+		return monstersArray;
 	},
 
 	addMonster(monsterObject) 
