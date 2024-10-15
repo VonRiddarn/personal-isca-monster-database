@@ -28,7 +28,7 @@ const monsterList =
 
 	addMonster(monsterObject) 
 	{
-		liveArray.push(monsterObject);
+		this.getMonsters().push(monsterObject);
 	},
 };
 
