@@ -59,15 +59,18 @@ function generateCardContent(card, monster)
 
 	// Profile stuff
 	cardProfile.appendChild(document.createElement("h3")).textContent = `${monster.alias}`;
-	cardProfile.appendChild(document.createElement("p")).textContent = `Alignment: ${monster.alignment}`;
-	cardProfile.appendChild(document.createElement("p")).textContent = `Color: ${ monster.color }`;
 
 	// Stats
-	const cardStats = card.appendChild(document.createElement("section")).appendChild(document.createElement("ul"));
+	const cardStats = card.appendChild(document.createElement("section"));
+
+	cardStats.appendChild(document.createElement("p")).textContent = `Alignment: ${monster.alignment}`;
+	cardStats.appendChild(document.createElement("p")).textContent = `Color: ${ monster.color }`;
+
+	const cardAttributes = cardStats.appendChild(document.createElement("ul"));
 
 	for (const stat in monster.stats) 
 	{
-		const statElement = cardStats.appendChild(document.createElement("li"));
+		const statElement = cardAttributes.appendChild(document.createElement("li"));
 		statElement.textContent = `${stat}: ${monster.stats[stat]}`;
 	}
 

@@ -64,8 +64,8 @@ function openMonsterEditorOnCard(articleElement, monsterObject)
 	}
 
 	const aliasElement = articleElement.querySelector("section h3");
-	const alignmentElement = articleElement.querySelector("section p");
-	const colorElement = articleElement.querySelectorAll("section p")[1];
+	const alignmentElement = articleElement.querySelectorAll("section")[1].querySelector("p");
+	const colorElement = articleElement.querySelectorAll("section")[1].querySelectorAll("p")[1];
 	const attributeElements = articleElement.querySelector("ul").children;
 
 	generateInputAndReplace(aliasElement, InputType.Text, "Name:", null);
@@ -98,15 +98,16 @@ function closeMonsterEditorOnCard(articleElement, monsterObject, saveChanges)
 	mockMonster.uid = monsterObject.uid;
 	mockMonster.stats = {};
 
+
 	const sections = articleElement.querySelectorAll("section");
 
 	const aliasElement = sections[0].children[0].querySelector("input");
 	mockMonster.alias = saveChanges ? aliasElement.value : monsterObject.alias;
 
-	const alignmentElement = sections[0].children[1].querySelector("select");
+	const alignmentElement = sections[1].children[0].querySelector("select");
 	mockMonster.alignment = saveChanges ? alignmentElement.value : monsterObject.alignment;
 	
-	const colorElement = sections[0].children[2].querySelector("select");
+	const colorElement = sections[1].children[1].querySelector("select");
 	mockMonster.color = saveChanges ? colorElement.value : monsterObject.color;
 
 	const attributeSpans = articleElement.querySelector("ul").children;
