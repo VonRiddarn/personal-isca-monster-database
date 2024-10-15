@@ -16,8 +16,15 @@ const monsterList =
 
 	deleteMonster(id)
 	{
-		let returnArray = this.getMonsters(useDummyArray);
+		let returnArray = this.getMonsters();
 		returnArray = returnArray.filter((monster => monster.uid !== id));
+
+		// Scuffed solution tbh, fast fix
+		if(useDummyArray)
+			dummyArray = returnArray;
+		else
+			liveArray = returnArray;
+
 		return returnArray;
 	},
 

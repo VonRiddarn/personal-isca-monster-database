@@ -15,8 +15,6 @@ const filteredSearchForm = document.getElementById("filtered-search").querySelec
 
 const main = document.querySelector("main");
 
-let currentArray = null;
-
 /*
 Depreciated!
 Reason: Overengineering.
@@ -123,9 +121,6 @@ const renderer =
 
 				generateCardContent(card, monster);
 			}
-
-			currentArray = monsterArr;
-
 		},
 		replace(card, newMonsterObject)
 		{
@@ -189,7 +184,7 @@ const renderer =
 				filteredSearchForm.appendChild(utilities.generateButton("Search", "filtered-search-form-submit")).addEventListener('click', (e) =>
 				{
 					e.preventDefault();
-					renderer.cardRenderer.renderAll(monsterList.getMonsters(true));
+					renderer.cardRenderer.renderAll(monsterList.getMonsters());
 					//renderer.formRenderer.filters.renderForm();
 				});
 			},
