@@ -88,8 +88,6 @@ function closeMonsterEditorOnCard(articleElement, monsterObject, saveChanges)
 		return false;
 	}
 
-	articleElement.className = "monster-card";
-
 	if(!saveChanges)
 	{
 		renderer.cardRenderer.replace(articleElement, monsterObject);
