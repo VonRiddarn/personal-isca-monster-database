@@ -3,6 +3,7 @@ import { utilities } from "./utilities.js";
 import { MonsterColor, MonsterAttribute, InputType, MonsterAlignment } from "./enums.js";
 import { monsterList } from "./monster-list.js";
 import { openMonsterEditorOnCard, closeMonsterEditorOnCard } from "./edit-monster.js";
+import { monsterGenerator } from "./add-monster.js";
 
 export {
 	renderer
@@ -151,8 +152,9 @@ const renderer =
 				addMonsterForm.appendChild(utilities.generateButton("Add monster", "add-monster-form-submit")).addEventListener('click', (e) =>
 				{
 					e.preventDefault();
-					console.log(`Created monster with ID: ${nextMonsterId}`);
-					nextMonsterId++;
+					monsterList.addMonster(monsterGenerator.generateMonster());
+					renderer.cardRenderer.renderAll(monsterList.getMonsters());
+					this.renderForm();
 				});
 			},
 		},
