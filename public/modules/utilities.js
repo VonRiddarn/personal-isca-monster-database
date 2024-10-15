@@ -7,6 +7,36 @@ export {
 const utilities = 
 {
 
+	generateTextInput(label, idRoot = null, isFilter = false) 
+	{
+		// <span>
+		const span = document.createElement("span");
+		if(idRoot)
+			span.setAttribute("id", `${idRoot}-span`);
+
+		// <span> label
+		const labelSpan = span.appendChild(document.createElement("span"));
+
+		// <input type="checkbox">
+		if(isFilter)
+		{
+			const colorCheckBox = labelSpan.appendChild(document.createElement("input"));
+			colorCheckBox.setAttribute("type", "checkbox");
+			colorCheckBox.setAttribute("id", `${idRoot}-isactive`);
+		}
+
+		// <label>
+		const labelElement = labelSpan.appendChild(document.createElement("label"));
+		labelElement.setAttribute("for", `${idRoot}-${isFilter ? "isactive" : "dropdown"}`);
+		labelElement.innerHTML = label;
+		
+		const textInput = span.appendChild(document.createElement("input"));
+		textInput.setAttribute("type", "text");
+		textInput.setAttribute("id", `${idRoot}-textinput`);
+
+		return span;
+	},
+	
 	generateDropDownFromEnum(enumToItterate, label, idRoot = null, isFilter = false) 
 	{
 		// <span>
