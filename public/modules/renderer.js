@@ -2,7 +2,7 @@ import { getFilteredMonsterArray } from "./filtered-search.js";
 import { utilities } from "./utilities.js";
 import { MonsterColor, MonsterAttribute, InputType, MonsterAlignment } from "./enums.js";
 import { monsterList } from "./monster-list.js";
-import { openMonsterEditorOnCard } from "./edit-monster.js";
+import { openMonsterEditorOnCard, closeMonsterEditorOnCard } from "./edit-monster.js";
 
 export {
 	renderer
@@ -14,6 +14,8 @@ const addMonsterForm = document.getElementById("add-monster").querySelector("for
 const filteredSearchForm = document.getElementById("filtered-search").querySelector("form");
 
 const main = document.querySelector("main");
+
+let currentArray = null;
 
 /*
 Depreciated!
@@ -40,11 +42,75 @@ function toggleButtonSpans(isEditing, deleteEditSpan, saveCancelSpan)
 
 }
 
+function generateCardContent(card, monster)
+{
+	const deleteEditSpan = card.appendChild(document.createElement("span"));
+
+	deleteEditSpan.appendChild(utilities.generateButton("Delete", null)).addEventListener('click', (e) =>
+	{
+		e.preventDefault();
+		monsterList.deleteMonster(monster.uid);
+		card.remove();
+		console.log(`--- MONSTER REMOVED ---`);
+		console.log(monster);
+		console.log("--- ---")
+	});
+	
+	deleteEditSpan.appendChild(utilities.generateButton("Edit", null)).addEventListener('click', (e) =>
+	{
+		e.preventDefault();
+		card.className = "monster-card isediting";
+		toggleButtonSpans(true, deleteEditSpan, saveCancelSpan);
+		openMonsterEditorOnCard(card, monster);
+	});
+
+	// Profile
+	const cardProfile = card.appendChild(document.createElement("section"));
+
+	// Profile stuff
+	cardProfile.appendChild(document.createElement("h3")).textContent = `${monster.alias}`;
+	cardProfile.appendChild(document.createElement("p")).textContent = `Alignment: ${monster.alignment}`;
+	cardProfile.appendChild(document.createElement("p")).textContent = `Color: ${ monster.color }`;
+
+	// Stats
+	const cardStats = card.appendChild(document.createElement("section")).appendChild(document.createElement("ul"));
+
+	for (const stat in monster.stats) 
+	{
+		const statElement = cardStats.appendChild(document.createElement("li"));
+		statElement.textContent = `${stat}: ${monster.stats[stat]}`;
+	}
+
+	const saveCancelSpan = card.appendChild(document.createElement("span"));
+	saveCancelSpan.setAttribute("style", "visibility: hidden;");
+
+
+	saveCancelSpan.appendChild(utilities.generateButton("Save", null)).addEventListener('click', (e) =>
+	{
+		e.preventDefault();
+		toggleButtonSpans(false, deleteEditSpan, saveCancelSpan);
+		const newMonster = closeMonsterEditorOnCard(card, monster, true);
+		console.log("----- MONSTER CHANGED -----")
+		console.log(monster);
+		console.log("-- TO --");
+		console.log(newMonster);
+		console.log("----- ----- -----");
+
+	});
+
+	saveCancelSpan.appendChild(utilities.generateButton("Cancel", null)).addEventListener('click', (e) =>
+	{
+		e.preventDefault();
+		closeMonsterEditorOnCard(card, monster, false);
+		toggleButtonSpans(false, deleteEditSpan, saveCancelSpan);
+	});
+}
+
 const renderer = 
 {
 	cardRenderer : 
 	{
-		renderCards(monsterArr, forceRenderAll = false) 
+		renderAll(monsterArr, forceRenderAll = false) 
 		{
 			let monsters = forceRenderAll ? monsterArr : getFilteredMonsterArray(monsterArr);
 			main.innerHTML = "";
@@ -56,72 +122,20 @@ const renderer =
 				card.className = "monster-card";
 				card.id = `monster-card-${monster.uid}`;
 
-				const deleteEditSpan = card.appendChild(document.createElement("span"));
-
-				// TODO:
-				/*
-					Add class to card: isediting
-					If class exist, do not accept Delete or Edit input
-					Add when editing, remove when done editing
-				*/
-				deleteEditSpan.appendChild(utilities.generateButton("Delete", null)).addEventListener('click', (e) =>
-				{
-					e.preventDefault();
-					this.renderCards(monsterList.deleteMonster(monster.uid));
-					console.log(`--- MONSTER REMOVED ---`);
-					console.log(monster);
-					console.log("--- ---")
-				});
-				
-				deleteEditSpan.appendChild(utilities.generateButton("Edit", null)).addEventListener('click', (e) =>
-				{
-					e.preventDefault();
-					toggleButtonSpans(true, deleteEditSpan, saveCancelSpan);
-					openMonsterEditorOnCard(card, monster);
-					console.log(`--- OPENED EDIT FORM FOR MONSTER ---`);
-					console.log(monster);
-					console.log("--- ---")
-				});
-
-				// Profile
-				const cardProfile = card.appendChild(document.createElement("section"));
-
-				// Profile stuff
-				cardProfile.appendChild(document.createElement("h3")).textContent = `${monster.alias}`;
-				cardProfile.appendChild(document.createElement("p")).textContent = `Alignment: ${monster.alignment}`;
-				cardProfile.appendChild(document.createElement("p")).textContent = `Color: ${ monster.color }`;
-
-				// Stats
-				const cardStats = card.appendChild(document.createElement("section")).appendChild(document.createElement("ul"));
-
-				for (const stat in monster.stats) 
-				{
-					const statElement = cardStats.appendChild(document.createElement("li"));
-					statElement.textContent = `${stat}: ${monster.stats[stat]}`;
-				}
-
-				const saveCancelSpan = card.appendChild(document.createElement("span"));
-				saveCancelSpan.setAttribute("style", "visibility: hidden;");
-
-
-				saveCancelSpan.appendChild(utilities.generateButton("Save", null)).addEventListener('click', (e) =>
-				{
-					e.preventDefault();
-					toggleButtonSpans(false, deleteEditSpan, saveCancelSpan);
-					console.log(`--- MONSTER SAVED ---`);
-					console.log(monster);
-					console.log("--- ---")
-				});
-
-				saveCancelSpan.appendChild(utilities.generateButton("Cancel", null)).addEventListener('click', (e) =>
-				{
-					e.preventDefault();
-					toggleButtonSpans(false, deleteEditSpan, saveCancelSpan);
-				});
-
+				generateCardContent(card, monster);
 			}
 
+			currentArray = monsterArr;
 
+		},
+		remove(uid)
+		{
+
+		},
+		replace(card, newMonsterObject)
+		{
+			card.innerHTML = "";
+			generateCardContent(card, newMonsterObject);
 		},
 	},
 
@@ -180,7 +194,7 @@ const renderer =
 				filteredSearchForm.appendChild(utilities.generateButton("Search", "filtered-search-form-submit")).addEventListener('click', (e) =>
 				{
 					e.preventDefault();
-					renderer.cardRenderer.renderCards(monsterList.getMonsters(true));
+					renderer.cardRenderer.renderAll(monsterList.getMonsters(true));
 					//renderer.formRenderer.filters.renderForm();
 				});
 			},
