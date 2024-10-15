@@ -139,6 +139,8 @@ const renderer =
 				addMonsterForm.innerHTML = "";
 
 				// Generate inputs
+				addMonsterForm.appendChild(utilities.generateTextInput("Name", "add-monster-alias"));
+				addMonsterForm.appendChild(utilities.generateDropDownFromEnum(MonsterAlignment, "Alignment", "add-monster-alignment"));
 				addMonsterForm.appendChild(utilities.generateDropDownFromEnum(MonsterColor, "Color", "add-monster-color"));
 				for (const el of utilities.generateNumericInputFieldsFromEnum(MonsterAttribute, "add-monster-attribute")) 
 				{	
