@@ -9,5 +9,8 @@ This project was initially developed without utilizing modules and later made th
 Hence, some files have a huge co-dependency issue that does not reflect upon clean code.<bt />
 In the best of worlds, we would adress this, but since the scope for this project is so low I will leave it.
 
-## Development team
+## What is this?
+This is more or less a carbon copy of the group project with the same name.<br />
+As I really liked this project I wanted to have a go at it on the side seeing what I could achieve alone. <br />
+This project is not nearly as pretty as the original, but should have a cleaner code base and scale better.<br />
 Developed solely by Timmy "VonRiddarn" Öhman.
