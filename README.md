@@ -1,7 +1,7 @@
 <p align="center">
   <img src="https://github.com/VonRiddarn/isca-monster-database/blob/main/public/resources/isca_labs.png?raw=true" alt="ISCA Logo" /> <br />
   <i>International securement and containment association</i><br />
-  <a href="https://vonriddarn.github.io/isca-monster-database/public/">CLICK HERE TO SEE THE LIVE PAGE</a>
+  <a href="https://vonriddarn.github.io/personal-isca-monster-database/public/">CLICK HERE TO SEE THE LIVE PAGE</a>
 </p>
 
 ## Important notice
