@@ -6,8 +6,8 @@ export {
 
 const useDummyArray = true;
 
-const monsterList = 
-{
+const monsterList = Object.freeze
+({
 
 	getMonsters() 
 	{
@@ -30,7 +30,7 @@ const monsterList =
 	{
 		this.getMonsters().push(monsterObject);
 	},
-};
+});
 
 let liveArray =  [];
 

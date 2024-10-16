@@ -6,8 +6,9 @@ export { monsterGenerator };
 // Next monsters Unique Identifier
 let nexyUid = monsterList.getMonsters().at(-1).uid || 0;
 
-const monsterGenerator = 
-{
+// Collected in case we want to generate different kinds of monsters / structures later
+const monsterGenerator = Object.freeze
+({
 	generateMonster()
 	{
 		const monster = 
@@ -31,4 +32,4 @@ const monsterGenerator =
 		console.log(monster);
 		return monster;
 	},
-};
+});

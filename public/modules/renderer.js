@@ -100,8 +100,8 @@ function generateCardContent(card, monster)
 	});
 }
 
-const renderer = 
-{
+const renderer = Object.freeze
+({
 	cardRenderer : 
 	{
 		renderAll(monsterArr, forceRenderAll = false) 
@@ -190,7 +190,7 @@ const renderer =
 			},
 		},
 	},
-};
+});
 
 // Initialize forms
 renderer.formRenderer.addMonster.renderForm();

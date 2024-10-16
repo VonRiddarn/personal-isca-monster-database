@@ -4,8 +4,8 @@ export {
 	utilities,
 };
 
-const utilities = 
-{
+const utilities = Object.freeze
+({
 
 	generateTextInput(label, idRoot = null, isFilter = false) 
 	{
@@ -125,7 +125,7 @@ const utilities =
 
 			// <select>
 			if (isFilter)
-				this.generateRawDropDownFromEnum(labelSpan, NumericFilterMethod, `${elementId}-numeric-filter-dropdown`);
+				labelSpan.appendChild(this.generateRawDropDownFromEnum(NumericFilterMethod, `${elementId}-numeric-filter-dropdown`));
 
 			// <input type="number" />
 			const count = span.appendChild(document.createElement("input"));
@@ -153,4 +153,4 @@ const utilities =
 	{ 
 		return Object.keys(object)[index] || null;
 	}
-}
+});
