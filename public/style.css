@@ -31,9 +31,17 @@ body
 
 header
 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	grid-area: header;
 	background-color: var(--isca-background-dark);
 	color: white;
+}
+
+img
+{
+	max-width: 200px;
 }
 
 aside
@@ -62,6 +70,7 @@ main
 	background-color: var(--isca-background-light);
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 }
 
 #monster-container
