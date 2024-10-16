@@ -13,8 +13,11 @@ export {
 const addMonsterForm = document.getElementById("add-monster").querySelector("form");
 // Filter form
 const filteredSearchForm = document.getElementById("filtered-search").querySelector("form");
-
+// Result text
+const resultText = document.querySelector("main p");
+// Monster container
 const monsterContainer = document.querySelector("#monster-container");
+
 
 /*
 Depreciated!
@@ -118,6 +121,8 @@ const renderer = Object.freeze
 
 				generateCardContent(card, monster);
 			}
+
+			resultText.textContent = `${monsters.length} / ${monsterList.getMonsters().length} results matched your search!`;
 		},
 		replace(card, newMonsterObject)
 		{
