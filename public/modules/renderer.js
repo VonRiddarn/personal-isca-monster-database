@@ -14,7 +14,7 @@ const addMonsterForm = document.getElementById("add-monster").querySelector("for
 // Filter form
 const filteredSearchForm = document.getElementById("filtered-search").querySelector("form");
 
-const main = document.querySelector("main");
+const monsterContainer = document.querySelector("#monster-container");
 
 /*
 Depreciated!
@@ -107,12 +107,12 @@ const renderer = Object.freeze
 		renderAll(monsterArr, forceRenderAll = false) 
 		{
 			let monsters = forceRenderAll ? monsterArr : getFilteredMonsterArray(monsterArr);
-			main.innerHTML = "";
+			monsterContainer.innerHTML = "";
 
 			for (const monster of monsters) 
 			{
 				// Initialize card
-				const card = main.appendChild(document.createElement("article"));
+				const card = monsterContainer.appendChild(document.createElement("article"));
 				card.className = "monster-card";
 				card.id = `monster-card-${monster.uid}`;
 
